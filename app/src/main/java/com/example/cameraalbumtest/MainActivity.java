@@ -62,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
             case TAKE_PHOTO:
                 if(resultCode==RESULT_OK){
                     try {
-                        Log.d("MainActivity","Camera Request");
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize=2;
                         //将拍的照片显示出来
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                       Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri),null,options);
+                        Log.d("MainActivity","imageUri:"+imageUri);
                         picture.setImageBitmap(bitmap);
                     }catch(FileNotFoundException e){
                         e.printStackTrace();
